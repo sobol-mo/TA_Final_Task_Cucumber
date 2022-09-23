@@ -11,6 +11,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import pages.HomePage;
 import pages.SearchResultsPage;
+import pages.SignInPage;
 
 import java.time.Duration;
 
@@ -23,6 +24,7 @@ public class DefinitionSteps {
     PageFactoryManager pageFactoryManager;
     HomePage homePage;
     SearchResultsPage searchResultsPage;
+    SignInPage signInPage;
     String keyWord;
 
     @Before
@@ -33,12 +35,12 @@ public class DefinitionSteps {
         pageFactoryManager = new PageFactoryManager(driver);
     }
 
-    @After
+/*    @After
     public void tearDown() {
-        driver.manage().deleteAllCookies();
+//        driver.manage().deleteAllCookies();
 //        driver.quit();
         driver.close();
-    }
+    }*/
 
     @And("User opens {string} page")
     public void openPage(final String url) {
@@ -78,5 +80,15 @@ public class DefinitionSteps {
         pageFactoryManager = new PageFactoryManager(driver);
         homePage = pageFactoryManager.getHomePage();
         Assert.isTrue(homePage.isSignInLinkVisible(), "Sing in link is not visible");
+    }
+
+    @And("User goes to sign in page")
+    public void userGoesToSignInPage() {
+        homePage.clickSignIn();
+        signInPage = pageFactoryManager.getSignInPage();
+        signInPage.waitForPageLoadComplete(DEFAULT_TIMEOUT);
+        signInPage.waitForAjaxToComplete(DEFAULT_TIMEOUT);
+        Assert.isTrue(signInPage.isUserIDInputVisible(), "UserId Input is not visible");
+
     }
 }

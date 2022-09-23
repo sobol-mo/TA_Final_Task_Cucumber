@@ -8,7 +8,7 @@ Feature: SingIn
   Scenario Outline: Check sign in with correct credentials
     Given User opens '<homePage>' page
     And User checks sign in link visibility
-#    And User goes to sign in page
+    And User goes to sign in page
 #    When User enter correct credentials '<login>' and '<password>'
 #    Then User logged in successfully
     Examples:

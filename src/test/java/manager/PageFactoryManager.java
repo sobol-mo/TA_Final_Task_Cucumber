@@ -3,6 +3,7 @@ package manager;
 import org.openqa.selenium.WebDriver;
 import pages.HomePage;
 import pages.SearchResultsPage;
+import pages.SignInPage;
 
 public class PageFactoryManager {
     WebDriver driver;
@@ -17,6 +18,10 @@ public class PageFactoryManager {
 
     public SearchResultsPage getSearchResultsPage() {
         return new SearchResultsPage(driver);
+    }
+
+    public SignInPage getSignInPage() {
+        return new SignInPage(driver);
     }
 
 }
