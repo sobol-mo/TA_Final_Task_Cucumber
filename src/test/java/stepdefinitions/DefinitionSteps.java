@@ -16,34 +16,32 @@ import java.time.Duration;
 
 import static io.github.bonigarcia.wdm.WebDriverManager.chromedriver;
 
-public class DefinitionSteps extends BaseSteps {
+public class DefinitionSteps {
 
-
-
+    static final Duration DEFAULT_TIMEOUT = Duration.ofSeconds(60);
+    static WebDriver driver;
+    PageFactoryManager pageFactoryManager;
+    HomePage homePage;
+    SearchResultsPage searchResultsPage;
     String keyWord;
-
-//    public DefinitionSteps() {
-//        super();
-//    }
 
     @Before
     public void testsSetUp() {
         chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-
+        pageFactoryManager = new PageFactoryManager(driver);
     }
 
     @After
     public void tearDown() {
         driver.manage().deleteAllCookies();
-        driver.quit();
+//        driver.quit();
         driver.close();
     }
 
     @And("User opens {string} page")
     public void openPage(final String url) {
-        pageFactoryManager = new PageFactoryManager(driver);
         homePage = pageFactoryManager.getHomePage();
         homePage.openHomePage(url);
     }
@@ -72,5 +70,13 @@ public class DefinitionSteps extends BaseSteps {
         searchResultsPage = pageFactoryManager.getSearchResultsPage();
         searchResultsPage.waitForPageLoadComplete(DEFAULT_TIMEOUT);
         searchResultsPage.clickInWatchListOnFirstProduct();
+    }
+
+    // Sing in:
+    @And("User checks sign in link visibility")
+    public void checkSingInLinkVisibility() {
+        pageFactoryManager = new PageFactoryManager(driver);
+        homePage = pageFactoryManager.getHomePage();
+        Assert.isTrue(homePage.isSignInLinkVisible(), "Sing in link is not visible");
     }
 }
