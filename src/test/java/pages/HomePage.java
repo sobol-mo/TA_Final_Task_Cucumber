@@ -5,14 +5,22 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class HomePage extends BasePage {
-    @FindBy(xpath = "//input[@id='gh-ac']")
+    @FindBy(xpath = "//input[@id='twotabsearchtextbox']")
     WebElement searchInput;
 
-    @FindBy(xpath = "//input[@id='gh-btn']")
+    @FindBy(xpath = "//input[@id='nav-search-submit-button']")
     WebElement searchButton;
 
-    @FindBy(xpath = "//span[@id='gh-ug']//a[contains(text(),'Sign in')]")
+    @FindBy(xpath = "//span[@id='nav-link-accountList-nav-line-1']")
     WebElement signInLink;
+
+    @FindBy(xpath = "//span[contains(text(),'Hello')]")
+    WebElement accountLink;
+
+//    @FindBy(xpath = "//span[contains(text(),'Your password is incorrect')]")
+//    WebElement incorrectPasswordMessage;
+
+    // Enter the characters you see
 
 
     public HomePage(WebDriver driver) {
@@ -39,6 +47,12 @@ public class HomePage extends BasePage {
     public boolean isSignInLinkVisible() {
         return signInLink.isDisplayed();
     }
+
+    public boolean isAccountLinkVisible() {
+        return accountLink.isDisplayed();
+    }
+
+
 
     public void clickSignIn() {
         signInLink.click();

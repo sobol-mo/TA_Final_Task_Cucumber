@@ -9,10 +9,10 @@ Feature: Smoke
     And User checks search field visibility
     When User makes search by keyword '<keyword>'
     And User clicks search button
-    And User clicks watchlist on first product
+#    And User clicks watchlist on first product
 #    Then User checks that amount of products in watchlist are '<amountOfProducts>'
 
     Examples:
-      | homePage              | keyword      | amountOfProducts |
-      | https://www.ebay.com/ | dire straits | 1                |
+      | homePage                | keyword      | amountOfProducts |
+      | https://www.amazon.com/ | dire straits | 1                |
 

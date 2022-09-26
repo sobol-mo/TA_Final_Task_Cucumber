@@ -8,14 +8,18 @@ import java.util.List;
 
 public class SearchResultsPage extends BasePage {
 
+
+
     public SearchResultsPage(WebDriver driver) {
         super(driver);
     }
 
+/*
     @FindBy(xpath = "(//span[@class='s-item__watchheart-icon'])[1]")
     WebElement watchListHeart;
 
     public void clickInWatchListOnFirstProduct() {
         watchListHeart.click();
     }
+*/
 }
