@@ -9,17 +9,25 @@ import java.util.List;
 public class SearchResultsPage extends BasePage {
 
 
+    @FindBy(xpath = "//span[contains(text(),'Dire Straits')]")
+    WebElement searchResultString;
+
+    @FindBy(xpath = "//div[@class='a-section aok-relative s-image-fixed-height']")
+    List<WebElement> searchResultsEntries;
+
+
+    public int getSearchResultsNumber() {
+        return searchResultsEntries.size();
+    }
+
+    public boolean isSearchResultStringVisible() {
+        return searchResultString.isDisplayed();
+    }
+
 
     public SearchResultsPage(WebDriver driver) {
         super(driver);
     }
 
-/*
-    @FindBy(xpath = "(//span[@class='s-item__watchheart-icon'])[1]")
-    WebElement watchListHeart;
 
-    public void clickInWatchListOnFirstProduct() {
-        watchListHeart.click();
-    }
-*/
 }

@@ -38,11 +38,10 @@ public class DefinitionSteps {
     @After
     public void tearDown() {
         driver.manage().deleteAllCookies();
-//        driver.quit();
         driver.close();
     }
 
-    @And("User opens {string} page")
+    @And("I open {string} page")
     public void openPage(final String url) {
         homePage = pageFactoryManager.getHomePage();
         homePage.openHomePage(url);
@@ -51,34 +50,47 @@ public class DefinitionSteps {
 
     }
 
-    @And("User checks search field visibility")
+    @And("I check search field visibility")
     public void userChecksSearchFieldVisibility() {
         homePage.isSearchFieldVisible();
         Assert.isTrue(homePage.isSearchFieldVisible(), "");
     }
 
-    @When("User makes search by keyword {string}")
+    @When("I make search by keyword {string}")
     public void userMakesSearchByKeyword(final String keyWord) {
         homePage.inputKeyWord(keyWord);
         this.keyWord = keyWord;
 
     }
 
-    @And("User clicks search button")
+    @And("I click search button")
     public void userClicksSearchButton() {
         homePage.clickSearchButton();
+        searchResultsPage = pageFactoryManager.getSearchResultsPage();
+
+    }
+
+    @Then("I can see right amount of products {string}")
+    public void rightAmountOfProductsIsDisplayed(final String productsAmount) {
+        searchResultsPage.waitForPageLoadComplete(DEFAULT_TIMEOUT);
+//        searchResultsPage.waitForAjaxToComplete(DEFAULT_TIMEOUT);
+        Assert.isTrue(searchResultsPage.isSearchResultStringVisible(), "");
+        Assert.state(searchResultsPage
+                .getSearchResultsNumber() == Integer.parseInt(productsAmount), "");
     }
 
 
-    // Sing in:
-    @And("User checks sign in link visibility")
+
+
+    // ********** Sing in:
+    @And("I check sign in link visibility")
     public void checkSingInLinkVisibility() {
         pageFactoryManager = new PageFactoryManager(driver);
         homePage = pageFactoryManager.getHomePage();
         Assert.isTrue(homePage.isSignInLinkVisible(), "");
     }
 
-    @And("User goes to sign in page")
+    @And("I go to sign in page")
     public void userGoesToSignInPage() {
         homePage.clickSignIn();
         signInPage = pageFactoryManager.getSignInPage();
@@ -89,7 +101,7 @@ public class DefinitionSteps {
 
     }
 
-    @When("User enter credentials {string} and {string}")
+    @When("I enter credentials {string} and {string}")
     public void userEnterCredentials(final String userID, final String userPassword) {
         signInPage.setUserIDInput(userID);
         signInPage.clickContinueButton();
@@ -99,17 +111,18 @@ public class DefinitionSteps {
         signInPage.clickSignInButton();
     }
 
-    @Then("User logged in successfully")
+    @Then("I logged in successfully")
     public void userLoggedInSuccessfully() {
         Assert.isTrue(homePage.isAccountLinkVisible(), "");
     }
 
-    @Then("User logged in unsuccessfully")
+    @Then("I logged in unsuccessfully")
     public void userLoggedInUnsuccessfully() {
-        Assert.isTrue(signInPage.isEnterCharactersMessageVisible(), "");
+//        Assert.isTrue(signInPage.isEnterCharactersMessageVisible(), "");
+        Assert.isTrue(signInPage.isIncorrectPasswordMessageVisible(), "");
     }
 
-    @When("User enter wrong {string}")
+    @When("I enter wrong {string}")
     public void userEnterWrongUserID(final String userID) {
         signInPage.setUserIDInput(userID);
         signInPage.clickContinueButton();
@@ -117,8 +130,10 @@ public class DefinitionSteps {
 
     }
 
-    @Then("User logged in unsuccessfully with wrong userID")
+    @Then("I logged in unsuccessfully with wrong userID")
     public void userLoggedInUnsuccessfullyWithWrongUserID() {
         Assert.isTrue(signInPage.isCannotFindAccountMessageVisible(), "");
     }
+
+
 }

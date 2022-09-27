@@ -6,11 +6,11 @@ Feature: SingIn
   @smoke
     @signin
   Scenario Outline: Check sign in with correct credentials
-    Given User opens '<homePage>' page
-    And User checks sign in link visibility
-    And User goes to sign in page
-    When User enter credentials '<userID>' and '<password>'
-    Then User logged in successfully
+    Given I open '<homePage>' page
+    And I check sign in link visibility
+    And I go to sign in page
+    When I enter credentials '<userID>' and '<password>'
+    Then I logged in successfully
     Examples:
       | homePage                | userID             | password        |
       | https://www.amazon.com/ | sobol.mo@gmail.com | u/S57(HjseUtiP@ |
@@ -19,11 +19,11 @@ Feature: SingIn
   @smoke
     @signin
   Scenario Outline: Check sign in with wrong password
-    Given User opens '<homePage>' page
-    And User checks sign in link visibility
-    And User goes to sign in page
-    When User enter credentials '<userID>' and '<password>'
-    Then User logged in unsuccessfully
+    Given I open '<homePage>' page
+    And I check sign in link visibility
+    And I go to sign in page
+    When I enter credentials '<userID>' and '<password>'
+    Then I logged in unsuccessfully
     Examples:
       | homePage                | userID             | password       |
       | https://www.amazon.com/ | sobol.mo@gmail.com | u/S57(HjseUtiP |
@@ -31,11 +31,11 @@ Feature: SingIn
   @smoke
     @signin
   Scenario Outline: Check sign in with wrong userID
-    Given User opens '<homePage>' page
-    And User checks sign in link visibility
-    And User goes to sign in page
-    When User enter wrong '<userID>'
-    Then User logged in unsuccessfully with wrong userID
+    Given I open '<homePage>' page
+    And I check sign in link visibility
+    And I go to sign in page
+    When I enter wrong '<userID>'
+    Then I logged in unsuccessfully with wrong userID
     Examples:
-      | homePage                | userID            | password       |
-      | https://www.amazon.com/ | sobol.m@gmail.com | u/S57(HjseUtiP |
+      | homePage                | userID            |
+      | https://www.amazon.com/ | sobol.m@gmail.com |

@@ -21,6 +21,9 @@ public class SignInPage extends BasePage {
     @FindBy(xpath = "//h4[contains(text(),'Enter the characters you see')]")
     WebElement enterCharactersMessage;
 
+    @FindBy(xpath = "//span[@class='a-list-item']")
+    WebElement incorrectPasswordMessage;
+
     @FindBy(xpath = "//span[contains(text(),'We cannot find an account')]")
     WebElement cannotFindAccountMessage;
 
@@ -49,6 +52,10 @@ public class SignInPage extends BasePage {
 
     public boolean isEnterCharactersMessageVisible() {
         return enterCharactersMessage.isDisplayed();
+    }
+
+    public boolean isIncorrectPasswordMessageVisible() {
+        return incorrectPasswordMessage.isDisplayed();
     }
 
     public boolean isCannotFindAccountMessageVisible() {

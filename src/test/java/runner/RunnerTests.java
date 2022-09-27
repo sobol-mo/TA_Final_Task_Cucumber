@@ -7,8 +7,8 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = "src/test/Features",
-        glue = "stepdefinitions"
-//        tags = "@smoke and @singin"
+        glue = "stepdefinitions"/*,
+        tags = "@smoke and @singin"*/
 )
 public class RunnerTests {
 
